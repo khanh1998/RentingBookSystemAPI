@@ -1,7 +1,8 @@
 package com.rentingbook.api.model.order;
 
+import com.rentingbook.api.audit.Auditable;
+import com.rentingbook.api.model.account.Account;
 import com.rentingbook.api.model.book.RentingBook;
-import com.rentingbook.api.model.user.Account;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,7 +18,7 @@ import java.util.Optional;
 @Getter
 @Setter
 @NoArgsConstructor
-public class BookOrder implements Serializable {
+public class BookOrder extends Auditable<Account> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

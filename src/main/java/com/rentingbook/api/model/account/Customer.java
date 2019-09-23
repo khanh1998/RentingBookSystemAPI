@@ -1,4 +1,4 @@
-package com.rentingbook.api.model.user;
+package com.rentingbook.api.model.account;
 
 import com.rentingbook.api.model.book.RentingBook;
 import com.rentingbook.api.model.order.BookOrder;

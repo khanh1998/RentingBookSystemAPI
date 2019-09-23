@@ -1,6 +1,6 @@
 package com.rentingbook.api.model.book.bookdetails;
 
-import com.rentingbook.api.model.user.Customer;
+import com.rentingbook.api.model.account.Customer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

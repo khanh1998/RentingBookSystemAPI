@@ -1,4 +1,4 @@
-package com.rentingbook.api.model.user;
+package com.rentingbook.api.model.account;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
