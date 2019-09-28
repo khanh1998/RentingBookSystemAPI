@@ -1,7 +1,7 @@
 package com.rentingbook.api.service.implement;
 
-import com.rentingbook.api.model.user.Account;
-import com.rentingbook.api.model.user.JwtUserDetails;
+import com.rentingbook.api.model.account.Account;
+import com.rentingbook.api.model.account.JwtUserDetails;
 import com.rentingbook.api.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

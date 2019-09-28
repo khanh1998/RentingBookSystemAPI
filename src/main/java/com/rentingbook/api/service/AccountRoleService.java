@@ -1,6 +1,6 @@
 package com.rentingbook.api.service;
 
-import com.rentingbook.api.model.user.AccountRole;
+import com.rentingbook.api.model.account.AccountRole;
 
 public interface AccountRoleService {
     AccountRole getRole(int id);

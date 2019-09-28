@@ -1,7 +1,7 @@
 package com.rentingbook.api.controller;
 
+import com.rentingbook.api.model.account.Account;
 import com.rentingbook.api.model.book.RentingBook;
-import com.rentingbook.api.model.user.Account;
 import com.rentingbook.api.service.AccountService;
 import com.rentingbook.api.service.RentingBookService;
 import org.springframework.beans.factory.annotation.Autowired;

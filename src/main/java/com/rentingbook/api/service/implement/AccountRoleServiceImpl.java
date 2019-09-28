@@ -1,6 +1,6 @@
 package com.rentingbook.api.service.implement;
 
-import com.rentingbook.api.model.user.AccountRole;
+import com.rentingbook.api.model.account.AccountRole;
 import com.rentingbook.api.repository.AccountRoleRepository;
 import com.rentingbook.api.service.AccountRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
