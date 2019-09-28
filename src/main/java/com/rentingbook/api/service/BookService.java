@@ -14,5 +14,5 @@ public interface BookService {
 
     List<Book> findByPage(Pageable pageable);
 
-    Book findByID(String ISBN);
+    Book findByISBN(String ISBN);
 }

@@ -1,7 +1,8 @@
 package com.rentingbook.api.model.order;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.rentingbook.api.model.book.RentingBook;
-import com.rentingbook.api.model.user.Account;
+import com.rentingbook.api.utils.deserializer.BookOrderDeserializer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,19 +18,20 @@ import java.util.Optional;
 @Getter
 @Setter
 @NoArgsConstructor
+@JsonDeserialize(using = BookOrderDeserializer.class)
 public class BookOrder implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @CreationTimestamp
-    private LocalDateTime createdDateTime;
-    @ManyToOne
-    private Account account;
-    private String status;
+    private String account;
+    private OrderStatus status;
     @OneToMany
     private List<RentingBook> books;
     private float shippingFee;
-
+    private boolean cancel;
+    private String address;
+    @CreationTimestamp
+    private LocalDateTime dateTime;
     @Transient
     public float getTotalPrice() {
         Optional<Float> total = books.stream()

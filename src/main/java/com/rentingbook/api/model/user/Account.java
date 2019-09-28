@@ -1,5 +1,7 @@
 package com.rentingbook.api.model.user;
 
+import com.rentingbook.api.model.book.RentingBook;
+import com.rentingbook.api.model.order.BookOrder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,6 +10,7 @@ import net.minidev.json.annotate.JsonIgnore;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity(name = "accounts")
 @Getter
@@ -25,5 +28,11 @@ public class Account implements Serializable {
     @JsonIgnore
     private String password;
     private boolean enable;
+    @ManyToOne
     private AccountRole accountRole;
+
+    @OneToMany
+    private List<BookOrder> orders;
+    @OneToMany
+    private List<RentingBook> savedBooks;
 }

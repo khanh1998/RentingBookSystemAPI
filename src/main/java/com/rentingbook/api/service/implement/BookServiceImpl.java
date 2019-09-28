@@ -65,7 +65,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book findByID(String ISBN) {
-        return repository.findById(ISBN).get();
+    public Book findByISBN(String ISBN) {
+        return repository.findByIsbn(ISBN);
     }
 }
