@@ -47,7 +47,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Account createAccount(Account account) {
         account.setPassword(passwordEncoder.encode(account.getPassword()));
-        AccountRole accountRole = accountRoleService.createRole("ADMIN");
+        AccountRole accountRole = accountRoleService.createAdminRole("ADMIN");
         account.setAccountRole(accountRole);
         return accountRepository.save(account);
     }

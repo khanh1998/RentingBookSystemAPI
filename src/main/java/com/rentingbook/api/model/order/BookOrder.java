@@ -9,7 +9,6 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -19,7 +18,7 @@ import java.util.Optional;
 @Setter
 @NoArgsConstructor
 @JsonDeserialize(using = BookOrderDeserializer.class)
-public class BookOrder implements Serializable {
+public class BookOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

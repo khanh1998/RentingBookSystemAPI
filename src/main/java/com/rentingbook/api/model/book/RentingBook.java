@@ -11,7 +11,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
 
 @Entity
@@ -20,7 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 @JsonDeserialize(using = RentingBookDeserializer.class)
-public class RentingBook implements Serializable {
+public class RentingBook {
     @Id
     private String barcode;
     @ManyToOne

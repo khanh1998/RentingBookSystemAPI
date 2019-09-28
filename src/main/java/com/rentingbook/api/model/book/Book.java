@@ -12,7 +12,6 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -22,7 +21,7 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @JsonDeserialize(using = BookDeserializer.class)
-public class Book implements Serializable {
+public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

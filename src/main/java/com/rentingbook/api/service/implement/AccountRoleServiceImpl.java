@@ -23,9 +23,22 @@ public class AccountRoleServiceImpl implements AccountRoleService {
     }
 
     @Override
-    public AccountRole createRole(String name) {
-        AccountRole accountRole = new AccountRole();
-        accountRole.setName("ADMIN");
-        return accountRoleRepository.save(accountRole);
+    public AccountRole createAdminRole(String name) {
+        AccountRole adminRole = accountRoleRepository.findByNameLike("ADMIN");
+        if (adminRole == null) {
+            adminRole = new AccountRole();
+            adminRole.setName("ADMIN");
+        }
+        return adminRole;
+    }
+
+    @Override
+    public AccountRole createCustomerRole(String name) {
+        AccountRole customerRole = accountRoleRepository.findByNameLike("CUSTOMER");
+        if (customerRole == null) {
+            customerRole = new AccountRole();
+            customerRole.setName("CUSTOMER");
+        }
+        return customerRole;
     }
 }

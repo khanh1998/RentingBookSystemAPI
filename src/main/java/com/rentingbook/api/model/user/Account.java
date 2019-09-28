@@ -9,14 +9,13 @@ import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import java.io.Serializable;
 import java.util.List;
 
 @Entity(name = "accounts")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Account implements Serializable {
+public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
