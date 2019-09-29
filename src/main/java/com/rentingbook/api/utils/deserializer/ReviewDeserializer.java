@@ -7,12 +7,14 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.rentingbook.api.model.book.bookdetails.Review;
 import com.rentingbook.api.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.jackson.JsonComponent;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 
+@JsonComponent
 public class ReviewDeserializer extends StdDeserializer<Review> {
     private AccountService accountService;
 

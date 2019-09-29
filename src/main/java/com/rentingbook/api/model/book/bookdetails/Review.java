@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @Setter
 @Getter
 @NoArgsConstructor
-@JsonDeserialize(using = ReviewDeserializer.class)
+//@JsonDeserialize(using = ReviewDeserializer.class)
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

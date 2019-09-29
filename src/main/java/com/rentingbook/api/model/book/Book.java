@@ -20,7 +20,7 @@ import java.util.List;
 @Setter
 @ToString
 @NoArgsConstructor
-@JsonDeserialize(using = BookDeserializer.class)
+//@JsonDeserialize(using = BookDeserializer.class)
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,8 +36,10 @@ public class Book {
     private List<Author> authors;
     @ManyToMany
     private List<Author> translators;
+    @Enumerated(EnumType.STRING)
     private Language language;
     @ElementCollection
+    @Enumerated(EnumType.STRING)
     private List<Genre> genres;
     private LocalDate publishedDate;
 }

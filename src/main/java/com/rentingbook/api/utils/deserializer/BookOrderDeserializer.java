@@ -9,6 +9,7 @@ import com.rentingbook.api.model.order.BookOrder;
 import com.rentingbook.api.model.order.OrderStatus;
 import com.rentingbook.api.service.RentingBookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.jackson.JsonComponent;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+@JsonComponent
 public class BookOrderDeserializer extends StdDeserializer<BookOrder> {
     private RentingBookService rentingBookService;
 

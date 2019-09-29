@@ -24,7 +24,7 @@ public class BookOrder {
     private int id;
     private String account;
     private OrderStatus status;
-    @OneToMany
+    @ManyToMany
     private List<RentingBook> books;
     private float shippingFee;
     private boolean cancel;

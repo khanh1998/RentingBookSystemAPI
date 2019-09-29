@@ -28,6 +28,7 @@ public class AccountRoleServiceImpl implements AccountRoleService {
         if (adminRole == null) {
             adminRole = new AccountRole();
             adminRole.setName("ADMIN");
+            accountRoleRepository.saveAndFlush(adminRole);
         }
         return adminRole;
     }
@@ -38,6 +39,7 @@ public class AccountRoleServiceImpl implements AccountRoleService {
         if (customerRole == null) {
             customerRole = new AccountRole();
             customerRole.setName("CUSTOMER");
+            accountRoleRepository.saveAndFlush(customerRole);
         }
         return customerRole;
     }

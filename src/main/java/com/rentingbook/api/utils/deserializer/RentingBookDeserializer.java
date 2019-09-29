@@ -9,12 +9,14 @@ import com.rentingbook.api.model.book.bookdetails.Cover;
 import com.rentingbook.api.service.BookService;
 import com.rentingbook.api.service.PublisherService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.jackson.JsonComponent;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+@JsonComponent
 public class RentingBookDeserializer extends StdDeserializer<RentingBook> {
     private BookService bookService;
     private PublisherService publisherService;

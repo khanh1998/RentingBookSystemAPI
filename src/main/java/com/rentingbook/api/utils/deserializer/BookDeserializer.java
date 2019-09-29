@@ -2,6 +2,7 @@ package com.rentingbook.api.utils.deserializer;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.rentingbook.api.model.book.Book;
@@ -10,6 +11,7 @@ import com.rentingbook.api.model.book.bookdetails.Genre;
 import com.rentingbook.api.model.book.bookdetails.Language;
 import com.rentingbook.api.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.jackson.JsonComponent;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -17,16 +19,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class BookDeserializer extends StdDeserializer<Book> {
+@JsonComponent
+public class BookDeserializer extends JsonDeserializer<Book> {
     private AuthorService authorService;
-
-    public BookDeserializer() {
-        this(null);
-    }
-
-    public BookDeserializer(Class<?> vc) {
-        super(vc);
-    }
 
     @Autowired
     public void setAuthorService(AuthorService authorService) {
@@ -36,7 +31,9 @@ public class BookDeserializer extends StdDeserializer<Book> {
     @Override
     public Book deserialize(JsonParser jsonParser, DeserializationContext deserializationContext)
             throws IOException {
+
         JsonNode jsonNode = jsonParser.getCodec().readTree(jsonParser);
+        System.out.println("jsonnode:" + jsonNode);
         Book newBook = new Book();
         //ISBN
         newBook.setIsbn(jsonNode.get("isbn").textValue());

@@ -18,7 +18,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @ToString
-@JsonDeserialize(using = RentingBookDeserializer.class)
+//@JsonDeserialize(using = RentingBookDeserializer.class)
 public class RentingBook {
     @Id
     private String barcode;
@@ -38,5 +38,6 @@ public class RentingBook {
     private float height;
     private float weight;
     private int pages;
+    @Enumerated(EnumType.STRING)
     private Cover cover;
 }
