@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -20,6 +21,7 @@ import java.util.List;
 @Setter
 @ToString
 @NoArgsConstructor
+
 //@JsonDeserialize(using = BookDeserializer.class)
 public class Book {
     @Id
