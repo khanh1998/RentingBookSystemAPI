@@ -29,10 +29,13 @@ public class BookOrderController {
     public BookOrder create(@RequestBody BookOrder bookOrder) {
         BookOrder order = bookOrderService.save(bookOrder);
         Account currentAccount = accountService.getCurrentAccount();
-        List<BookOrder> bookOrders = currentAccount.getOrders();
-        bookOrders.add(order);
-        accountService.save(currentAccount);
-        return order;
+        if (currentAccount.getUsername().equalsIgnoreCase(bookOrder.getAccount())) {
+            List<BookOrder> bookOrders = currentAccount.getOrders();
+            bookOrders.add(order);
+            accountService.save(currentAccount);
+            return order;
+        }
+        return null;
     }
 
     @GetMapping
