@@ -6,6 +6,8 @@ import com.rentingbook.api.service.BookOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class BookOrderServiceImpl implements BookOrderService {
     private BookOrderRepository bookOrderRepository;
@@ -17,18 +19,21 @@ public class BookOrderServiceImpl implements BookOrderService {
 
     @Override
     public BookOrder save(BookOrder bookOrder) {
-        return bookOrderRepository.save(bookOrder);
+        return bookOrderRepository.saveAndFlush(bookOrder);
     }
 
     @Override
-    public BookOrder findById(int id) {
-        return bookOrderRepository.findById(id).get();
+    public Optional<BookOrder> findById(int id) {
+        return bookOrderRepository.findById(id);
     }
 
     @Override
-    public BookOrder delete(int id) {
-        BookOrder order = bookOrderRepository.findById(id).get();
-        order.setCancel(true);
+    public Optional<BookOrder> delete(int id) {
+        Optional<BookOrder> order = findById(id);
+        if (order.isPresent()) {
+            order.get().setCancel(true);
+            return Optional.of(order.get());
+        }
         return order;
     }
 }

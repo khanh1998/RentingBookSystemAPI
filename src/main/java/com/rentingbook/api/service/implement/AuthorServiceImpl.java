@@ -43,14 +43,14 @@ public class AuthorServiceImpl implements AuthorService {
     public List<Author> updateAuthors(List<Author> authors) {
         List<Author> updatedAuthors = new ArrayList<>();
         authors.forEach(author -> {
-            repository.save(author);
+            repository.saveAndFlush(author);
             updatedAuthors.add(author);
         });
         return updatedAuthors;
     }
 
     @Override
-    public Author findByID(int id) {
-        return repository.findById(id).get();
+    public Optional<Author> findByID(int id) {
+        return repository.findById(id);
     }
 }

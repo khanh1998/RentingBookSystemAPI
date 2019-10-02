@@ -3,6 +3,7 @@ package com.rentingbook.api.service;
 import com.rentingbook.api.model.book.bookdetails.Author;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface AuthorService {
 
@@ -12,5 +13,5 @@ public interface AuthorService {
 
     List<Author> updateAuthors(List<Author> authors);
 
-    Author findByID(int id);
+    Optional<Author> findByID(int id);
 }

@@ -21,12 +21,27 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-    @Autowired
+
     private AuthenticationEntryPoint authenticationEntryPoint;
-    @Autowired
+
     private UserDetailsService jwtUserDetailsService;
-    @Autowired
+
     private JwtRequestFilter jwtRequestFilter;
+
+    @Autowired
+    public void setAuthenticationEntryPoint(AuthenticationEntryPoint authenticationEntryPoint) {
+        this.authenticationEntryPoint = authenticationEntryPoint;
+    }
+
+    @Autowired
+    public void setJwtUserDetailsService(UserDetailsService jwtUserDetailsService) {
+        this.jwtUserDetailsService = jwtUserDetailsService;
+    }
+
+    @Autowired
+    public void setJwtRequestFilter(JwtRequestFilter jwtRequestFilter) {
+        this.jwtRequestFilter = jwtRequestFilter;
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -55,6 +70,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/book").permitAll()
                 .antMatchers(HttpMethod.GET, "/rentingbook").permitAll()
                 .antMatchers(HttpMethod.GET, "/author").permitAll()
+                .antMatchers(HttpMethod.GET, "/publisher").permitAll()
+                .antMatchers(HttpMethod.GET, "/genre").permitAll()
                 // all other requests need to be authenticated
                 .anyRequest().authenticated().and()
                 // make sure we use stateless session; session won't be used to

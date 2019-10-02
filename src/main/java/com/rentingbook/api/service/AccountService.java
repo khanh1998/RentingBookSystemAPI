@@ -8,5 +8,6 @@ public interface AccountService {
     Account save(Account account);
     Account createAccount(Account account);
 
+    void delete(Account account);
     Account getCurrentAccount();
 }

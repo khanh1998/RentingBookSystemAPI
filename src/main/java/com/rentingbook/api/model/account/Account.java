@@ -1,6 +1,7 @@
 package com.rentingbook.api.model.account;
 
 import com.rentingbook.api.model.book.RentingBook;
+import com.rentingbook.api.model.cart.Cart;
 import com.rentingbook.api.model.order.BookOrder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,4 +35,6 @@ public class Account {
     private List<BookOrder> orders;
     @OneToMany
     private List<RentingBook> savedBooks;
+    @OneToOne
+    private Cart cart;
 }

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.rentingbook.api.model.book.Book;
 import com.rentingbook.api.model.book.bookdetails.Author;
 import com.rentingbook.api.model.book.bookdetails.Genre;
@@ -18,6 +17,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 @JsonComponent
 public class BookDeserializer extends JsonDeserializer<Book> {
@@ -70,7 +70,9 @@ public class BookDeserializer extends JsonDeserializer<Book> {
         List<Author> authors = new ArrayList<>();
         while (authorIDs.hasNext()) {
             int authorID = authorIDs.next().intValue();
-            authors.add(authorService.findByID(authorID));
+            Optional<Author> author = authorService.findByID(authorID);
+            if (author.isPresent())
+                authors.add(author.get());
         }
         return authors;
     }

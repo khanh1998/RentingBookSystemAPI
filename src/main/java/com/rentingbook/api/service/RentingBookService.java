@@ -10,6 +10,7 @@ public interface RentingBookService {
 
     List<RentingBook> findByPage(Pageable page);
 
+    List<RentingBook> findAll();
     RentingBook findByBarcode(String barcode);
 
     RentingBook save(RentingBook rentingBook);

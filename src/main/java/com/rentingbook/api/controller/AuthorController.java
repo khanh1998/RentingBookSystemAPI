@@ -3,9 +3,11 @@ package com.rentingbook.api.controller;
 import com.rentingbook.api.model.book.bookdetails.Author;
 import com.rentingbook.api.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/author")
@@ -18,8 +20,12 @@ public class AuthorController {
     }
 
     @GetMapping("")
-    public Author getAuthors(@RequestParam int id) {
-        return authorService.findByID(id);
+    public ResponseEntity<?> getAuthors(@RequestParam int id) {
+        Optional<Author> author = authorService.findByID(id);
+        if (author.isPresent()) {
+            return ResponseEntity.ok(author);
+        }
+        return ResponseEntity.badRequest().body("Wrong id of author");
     }
 
     @PostMapping("")

@@ -41,7 +41,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account save(Account account) {
-        return accountRepository.save(account);
+        return accountRepository.saveAndFlush(account);
     }
 
     @Override
@@ -49,7 +49,13 @@ public class AccountServiceImpl implements AccountService {
         account.setPassword(passwordEncoder.encode(account.getPassword()));
         AccountRole accountRole = accountRoleService.createAdminRole("ADMIN");
         account.setAccountRole(accountRole);
-        return accountRepository.save(account);
+        return accountRepository.saveAndFlush(account);
+    }
+
+    @Override
+    public void delete(Account account) {
+        account.setEnable(false);
+        accountRepository.delete(account);
     }
 
     @Override

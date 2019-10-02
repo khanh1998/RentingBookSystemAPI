@@ -34,6 +34,11 @@ public class RentingBookServiceImpl implements RentingBookService {
     }
 
     @Override
+    public List<RentingBook> findAll() {
+        return repository.findAll();
+    }
+
+    @Override
     public RentingBook findByBarcode(String barcode) {
         return repository.findByBarcode(barcode);
     }

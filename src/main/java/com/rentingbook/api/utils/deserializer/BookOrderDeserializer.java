@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.rentingbook.api.model.book.RentingBook;
 import com.rentingbook.api.model.order.BookOrder;
-import com.rentingbook.api.model.order.OrderStatus;
+import com.rentingbook.api.model.order.orderdetails.OrderStatus;
 import com.rentingbook.api.service.RentingBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jackson.JsonComponent;
