@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import com.rentingbook.api.model.book.RentingBook;
+import com.rentingbook.api.model.book.RentalBook;
 import com.rentingbook.api.model.book.bookdetails.Cover;
 import com.rentingbook.api.service.BookService;
 import com.rentingbook.api.service.PublisherService;
@@ -17,7 +17,7 @@ import java.util.Iterator;
 import java.util.List;
 
 @JsonComponent
-public class RentingBookDeserializer extends StdDeserializer<RentingBook> {
+public class RentingBookDeserializer extends StdDeserializer<RentalBook> {
     private BookService bookService;
     private PublisherService publisherService;
 
@@ -30,25 +30,25 @@ public class RentingBookDeserializer extends StdDeserializer<RentingBook> {
     }
 
     @Override
-    public RentingBook deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
+    public RentalBook deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
         JsonNode jsonNode = jsonParser.getCodec().readTree(jsonParser);
-        RentingBook rentingBook = new RentingBook();
+        RentalBook rentalBook = new RentalBook();
 
-        rentingBook.setBarcode(jsonNode.get("barcode").textValue());
-        rentingBook.setBook(bookService.findByISBN(jsonNode.get("book").textValue()));
-        rentingBook.setPublisher(publisherService.findByID(jsonNode.get("publisher").asInt()));
-        rentingBook.setCover(Cover.valueOf(jsonNode.get("cover").textValue()));
-        rentingBook.setRentable(jsonNode.get("rentable").asBoolean());
-        rentingBook.setHeight((float) jsonNode.get("height").asDouble());
-        rentingBook.setWeight((float) jsonNode.get("weight").asDouble());
-        rentingBook.setWidth((float) jsonNode.get("width").asDouble());
-        rentingBook.setPrice((float) jsonNode.get("price").asDouble());
-        rentingBook.setPages(jsonNode.get("pages").asInt());
-        rentingBook.setQuantity(jsonNode.get("quantity").asInt());
-        rentingBook.setRented(jsonNode.get("rented").asInt());
-        rentingBook.setImageURLs(getListImage(jsonNode.get("imageURLs").iterator()));
+        rentalBook.setBarcode(jsonNode.get("barcode").textValue());
+        rentalBook.setBook(bookService.findByISBN(jsonNode.get("book").textValue()));
+        rentalBook.setPublisher(publisherService.findByID(jsonNode.get("publisher").asInt()));
+        rentalBook.setCover(Cover.valueOf(jsonNode.get("cover").textValue()));
+        rentalBook.setRentable(jsonNode.get("rentable").asBoolean());
+        rentalBook.setHeight((float) jsonNode.get("height").asDouble());
+        rentalBook.setWeight((float) jsonNode.get("weight").asDouble());
+        rentalBook.setWidth((float) jsonNode.get("width").asDouble());
+        rentalBook.setOriginalPrice((float) jsonNode.get("price").asDouble());
+        rentalBook.setPages(jsonNode.get("pages").asInt());
+        rentalBook.setQuantity(jsonNode.get("quantity").asInt());
+        rentalBook.setRented(jsonNode.get("rented").asInt());
+        rentalBook.setImageURLs(getListImage(jsonNode.get("imageURLs").iterator()));
 
-        return rentingBook;
+        return rentalBook;
     }
 
     private List<String> getListImage(Iterator<JsonNode> iterator) {

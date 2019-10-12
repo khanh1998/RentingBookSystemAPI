@@ -1,15 +1,12 @@
 package com.rentingbook.api.model.book;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.rentingbook.api.model.book.bookdetails.Author;
 import com.rentingbook.api.model.book.bookdetails.Genre;
 import com.rentingbook.api.model.book.bookdetails.Language;
-import com.rentingbook.api.utils.deserializer.BookDeserializer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -33,6 +30,7 @@ public class Book {
     @NotEmpty
     private String title;
     @NotEmpty
+    @Column(length = 5000)
     private String description;
     @ManyToMany
     private List<Author> authors;

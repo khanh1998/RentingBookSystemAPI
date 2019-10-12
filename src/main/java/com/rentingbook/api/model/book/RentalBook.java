@@ -1,10 +1,8 @@
 package com.rentingbook.api.model.book;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.rentingbook.api.model.book.bookdetails.Cover;
 import com.rentingbook.api.model.book.bookdetails.Publisher;
 import com.rentingbook.api.model.book.bookdetails.Review;
-import com.rentingbook.api.utils.deserializer.RentingBookDeserializer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,12 +17,13 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 //@JsonDeserialize(using = RentingBookDeserializer.class)
-public class RentingBook {
+public class RentalBook {
     @Id
     private String barcode;
     @ManyToOne
     private Book book;
-    private float price;
+    private float rentalPrice;
+    private float originalPrice;
     private int quantity;
     private int rented;
     private boolean rentable;
@@ -40,4 +39,10 @@ public class RentingBook {
     private int pages;
     @Enumerated(EnumType.STRING)
     private Cover cover;
+    //week
+    private int rentalDuration;
+    //week
+    private int renewalDuration;
+    //turn
+    private int renewalTurnQuota;
 }

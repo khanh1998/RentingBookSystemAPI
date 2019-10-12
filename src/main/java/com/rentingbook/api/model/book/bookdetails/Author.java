@@ -4,10 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
@@ -20,6 +17,7 @@ public class Author {
     private int id;
     @NotEmpty
     private String name;
+    @Column(length = 2000)
     private String biography;
     private String avatarURL;
 }

@@ -1,6 +1,6 @@
 package com.rentingbook.api.model.cart;
 
-import com.rentingbook.api.model.book.RentingBook;
+import com.rentingbook.api.model.book.RentalBook;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,7 +13,7 @@ import java.util.List;
 @Getter
 public class Cart {
     @ManyToMany
-    List<RentingBook> books;
+    List<RentalBook> books;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

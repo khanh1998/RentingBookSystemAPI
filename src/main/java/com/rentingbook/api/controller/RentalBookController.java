@@ -1,9 +1,9 @@
 package com.rentingbook.api.controller;
 
-import com.rentingbook.api.model.book.RentingBook;
+import com.rentingbook.api.model.book.RentalBook;
 import com.rentingbook.api.model.book.bookdetails.Genre;
 import com.rentingbook.api.model.book.bookdetails.Language;
-import com.rentingbook.api.service.RentingBookService;
+import com.rentingbook.api.service.RentalBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,21 +13,21 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/rentingbook")
-public class RentingBookController {
-    private RentingBookService service;
+public class RentalBookController {
+    private RentalBookService service;
 
     @Autowired
-    public void setService(RentingBookService service) {
+    public void setService(RentalBookService service) {
         this.service = service;
     }
 
     @PostMapping
-    public List<RentingBook> createBooks(@RequestBody List<RentingBook> rentingBooks) {
-        return service.createBooks(rentingBooks);
+    public List<RentalBook> createBooks(@RequestBody List<RentalBook> rentalBooks) {
+        return service.createBooks(rentalBooks);
     }
 
     @GetMapping
-    public List<RentingBook> getBooks(
+    public List<RentalBook> getBooks(
             @RequestParam(required = false, defaultValue = "0") Integer page,
             @RequestParam(required = false, defaultValue = "10") Integer size,
             @RequestParam(required = false) Integer authorId,
@@ -38,15 +38,8 @@ public class RentingBookController {
             @RequestParam(required = false) String title,
             @RequestParam(required = false) Float startPrice,
             @RequestParam(required = false) Float endPrice) {
-        System.out.println(authorId);
-        System.out.println(barcode);
-        System.out.println(isbn);
-        System.out.println(genre);
-        System.out.println(language);
-        System.out.println(startPrice);
-        System.out.println(endPrice);
 
-        List<RentingBook> results = service.findAll().stream()
+        List<RentalBook> results = service.findAll().stream()
                 .filter(rentingBook -> {
                     if (isbn != null) {
                         return rentingBook.getBook().getIsbn().equalsIgnoreCase(isbn);
@@ -84,13 +77,13 @@ public class RentingBookController {
                 })
                 .filter(rentingBook -> {
                     if (startPrice != null) {
-                        return rentingBook.getPrice() >= startPrice;
+                        return rentingBook.getRentalPrice() >= startPrice;
                     }
                     return true;
                 })
                 .filter(rentingBook -> {
                     if (endPrice != null) {
-                        return rentingBook.getPrice() >= endPrice;
+                        return rentingBook.getRentalPrice() >= endPrice;
                     }
                     return true;
                 })
@@ -101,7 +94,7 @@ public class RentingBookController {
                     return true;
                 })
                 .collect(Collectors.toList());
-        List<RentingBook> responsePage = new ArrayList<>();
+        List<RentalBook> responsePage = new ArrayList<>();
         int start = page * size;
         int stop = page * size + size - 1;
         if (results.size() > start) {
@@ -119,7 +112,7 @@ public class RentingBookController {
     }
 
     @GetMapping("/{barcode}")
-    public RentingBook getBook(@PathVariable String barcode) {
+    public RentalBook getBook(@PathVariable String barcode) {
         return service.findByBarcode(barcode);
     }
 }

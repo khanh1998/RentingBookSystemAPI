@@ -32,7 +32,6 @@ public class BookController {
 
     @PostMapping
     public List<Book> create(@RequestBody List<Book> books) {
-        System.out.println("\nbooks:\n" + books);
         return service.createBooks(books);
     }
 

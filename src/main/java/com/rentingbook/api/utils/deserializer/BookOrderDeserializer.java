@@ -4,10 +4,10 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import com.rentingbook.api.model.book.RentingBook;
+import com.rentingbook.api.model.book.RentalBook;
 import com.rentingbook.api.model.order.BookOrder;
 import com.rentingbook.api.model.order.orderdetails.OrderStatus;
-import com.rentingbook.api.service.RentingBookService;
+import com.rentingbook.api.service.RentalBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jackson.JsonComponent;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,7 +20,7 @@ import java.util.List;
 
 @JsonComponent
 public class BookOrderDeserializer extends StdDeserializer<BookOrder> {
-    private RentingBookService rentingBookService;
+    private RentalBookService rentalBookService;
 
     public BookOrderDeserializer() {
         this(null);
@@ -31,8 +31,8 @@ public class BookOrderDeserializer extends StdDeserializer<BookOrder> {
     }
 
     @Autowired
-    public void setRentingBookService(RentingBookService rentingBookService) {
-        this.rentingBookService = rentingBookService;
+    public void setRentalBookService(RentalBookService rentalBookService) {
+        this.rentalBookService = rentalBookService;
     }
 
     @Override
@@ -42,11 +42,11 @@ public class BookOrderDeserializer extends StdDeserializer<BookOrder> {
         String username = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
         JsonNode jsonNode = jsonParser.getCodec().readTree(jsonParser);
         Iterator<JsonNode> books = jsonNode.get("books").iterator();
-        List<RentingBook> rentingBooks = getRentingBooks(books);
-        changeQuantityOfBookInRepository(rentingBooks);
+        List<RentalBook> rentalBooks = getRentingBooks(books);
+        changeQuantityOfBookInRepository(rentalBooks);
 
         bookOrder.setCancel(false);
-        bookOrder.setBooks(rentingBooks);
+        bookOrder.setBooks(rentalBooks);
         bookOrder.setAccount(username);
         bookOrder.setAddress(jsonNode.get("address").textValue());
         bookOrder.setStatus(OrderStatus.Accepted);
@@ -54,19 +54,19 @@ public class BookOrderDeserializer extends StdDeserializer<BookOrder> {
         return bookOrder;
     }
 
-    private void changeQuantityOfBookInRepository(List<RentingBook> books) {
+    private void changeQuantityOfBookInRepository(List<RentalBook> books) {
         books.forEach(book -> {
             book.setQuantity(book.getQuantity() - 1);
             book.setRented(book.getRented() + 1);
-            rentingBookService.save(book);
+            rentalBookService.save(book);
         });
     }
 
-    private List<RentingBook> getRentingBooks(Iterator<JsonNode> iterator) {
-        List<RentingBook> books = new ArrayList<>();
+    private List<RentalBook> getRentingBooks(Iterator<JsonNode> iterator) {
+        List<RentalBook> books = new ArrayList<>();
         while (iterator.hasNext()) {
             String barcode = iterator.next().textValue();
-            books.add(rentingBookService.findByBarcode(barcode));
+            books.add(rentalBookService.findByBarcode(barcode));
         }
         return books;
     }

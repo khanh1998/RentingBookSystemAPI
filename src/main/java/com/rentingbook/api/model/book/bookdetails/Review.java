@@ -1,16 +1,11 @@
 package com.rentingbook.api.model.book.bookdetails;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.rentingbook.api.utils.deserializer.ReviewDeserializer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -24,6 +19,7 @@ public class Review {
     private int id;
     private String account;
     private int rate;
+    @Column(length = 2000)
     private String comment;
     @CreationTimestamp
     private LocalDateTime dateTime;
