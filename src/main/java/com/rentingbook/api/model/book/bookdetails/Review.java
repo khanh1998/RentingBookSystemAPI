@@ -18,8 +18,7 @@ public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @ManyToOne
-    private Account account;
+    private String account;
     private int rate;
     private String title;
     @Column(length = 2000)
