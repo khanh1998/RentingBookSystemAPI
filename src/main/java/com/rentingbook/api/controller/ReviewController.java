@@ -34,7 +34,7 @@ public class ReviewController {
 
     @PostMapping
     public Review createReview(@RequestParam String barcode, @RequestBody Review review) {
-        review.setAccount(accountService.getCurrentAccount());
+        review.setAccount(accountService.getCurrentAccount().getUsername());
         Review createdReview = reviewService.save(review);
         RentalBook rentalBook = bookService.findByBarcode(barcode);
         List<Review> reviews = rentalBook.getReviews();

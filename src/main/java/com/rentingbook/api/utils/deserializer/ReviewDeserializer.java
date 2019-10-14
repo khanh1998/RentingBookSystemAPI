@@ -38,7 +38,7 @@ public class ReviewDeserializer extends StdDeserializer<Review> {
         String username = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
         //System.out.println("username:"+username);
         //Account account = accountService.getAccount(username);
-        review.setAccount(accountService.getCurrentAccount());
+        review.setAccount(accountService.getCurrentAccount().getUsername());
         review.setComment(jsonNode.get("comment").textValue());
         review.setDateTime(LocalDateTime.now());
         review.setRate(jsonNode.get("rate").asInt());
