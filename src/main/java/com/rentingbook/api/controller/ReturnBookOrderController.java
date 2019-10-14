@@ -31,15 +31,12 @@ public class ReturnBookOrderController {
     public ResponseEntity<?> create(@RequestBody ReturnBookOrder returnBookOrder) {
         ReturnBookOrder order = returnBookOrderService.save(returnBookOrder);
         Account account = accountService.getCurrentAccount();
-        if (account.getUsername().equalsIgnoreCase(order.getAccount())) {
-            List<ReturnBookOrder> list = account.getReturnBookOrders();
-            list.add(returnBookOrder);
-            account.setReturnBookOrders(list);
+        List<ReturnBookOrder> list = account.getReturnBookOrders();
+        list.add(returnBookOrder);
+        account.setReturnBookOrders(list);
 
-            accountService.save(account);
-            return ResponseEntity.ok(order);
-        }
-        return ResponseEntity.badRequest().body("something went wrong");
+        accountService.save(account);
+        return ResponseEntity.ok(order);
     }
 
     @PatchMapping

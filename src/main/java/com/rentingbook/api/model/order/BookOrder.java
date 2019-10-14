@@ -22,7 +22,6 @@ public class BookOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String account;
     private OrderStatus status = OrderStatus.Received;
     @ManyToMany
     private List<RentalBook> books;

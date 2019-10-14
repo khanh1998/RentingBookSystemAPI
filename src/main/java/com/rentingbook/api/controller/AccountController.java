@@ -86,8 +86,7 @@ public class AccountController {
     public List<RentalBook> saveBook(@RequestParam String barcode) {
         RentalBook rentalBook = bookService.findByBarcode(barcode);
         System.out.println(rentalBook);
-        String username = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
-        Account account = accountService.getAccount(username);
+        Account account = accountService.getCurrentAccount();
         List<RentalBook> savedBooks = account.getSavedBooks();
         if (savedBooks.contains(rentalBook)) {
             return savedBooks;

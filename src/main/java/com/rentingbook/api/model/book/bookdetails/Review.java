@@ -19,6 +19,7 @@ public class Review {
     private int id;
     private String account;
     private int rate;
+    private String title;
     @Column(length = 2000)
     private String comment;
     @CreationTimestamp

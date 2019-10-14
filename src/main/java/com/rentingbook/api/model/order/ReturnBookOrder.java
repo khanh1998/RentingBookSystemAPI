@@ -22,7 +22,6 @@ public class ReturnBookOrder {
     private int id;
     @ManyToMany
     private List<RentedBook> rentedBooks;
-    private String account;
     private String address;
     private float shippingFee;
     private boolean cancel;

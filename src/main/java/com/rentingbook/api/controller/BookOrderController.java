@@ -32,13 +32,10 @@ public class BookOrderController {
     public ResponseEntity<BookOrder> create(@RequestBody BookOrder bookOrder) {
         BookOrder order = bookOrderService.save(bookOrder);
         Account currentAccount = accountService.getCurrentAccount();
-        if (currentAccount.getUsername().equalsIgnoreCase(bookOrder.getAccount())) {
-            List<BookOrder> bookOrders = currentAccount.getOrders();
-            bookOrders.add(order);
-            Account saved = accountService.save(currentAccount);
-            return ResponseEntity.of(saved.getOrders().stream().findFirst());
-        }
-        return null;
+        List<BookOrder> bookOrders = currentAccount.getOrders();
+        bookOrders.add(order);
+        Account saved = accountService.save(currentAccount);
+        return ResponseEntity.of(saved.getOrders().stream().findFirst());
     }
 
     @PatchMapping
@@ -49,6 +46,7 @@ public class BookOrderController {
         }
         return ResponseEntity.badRequest().body("You can not update order when it has been done");
     }
+
     @GetMapping
     public ResponseEntity<BookOrder> findOrder(@RequestParam Integer orderId) {
         Account currentAccount = accountService.getCurrentAccount();
