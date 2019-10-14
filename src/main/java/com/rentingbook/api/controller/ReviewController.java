@@ -2,6 +2,7 @@ package com.rentingbook.api.controller;
 
 import com.rentingbook.api.model.book.RentalBook;
 import com.rentingbook.api.model.book.bookdetails.Review;
+import com.rentingbook.api.service.AccountService;
 import com.rentingbook.api.service.RentalBookService;
 import com.rentingbook.api.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,12 @@ import java.util.List;
 public class ReviewController {
     private ReviewService reviewService;
     private RentalBookService bookService;
+    private AccountService accountService;
+
+    @Autowired
+    public void setAccountService(AccountService accountService) {
+        this.accountService = accountService;
+    }
 
     @Autowired
     public void setReviewService(ReviewService reviewService) {
@@ -27,6 +34,7 @@ public class ReviewController {
 
     @PostMapping
     public Review createReview(@RequestParam String barcode, @RequestBody Review review) {
+        review.setAccount(accountService.getCurrentAccount());
         Review createdReview = reviewService.save(review);
         RentalBook rentalBook = bookService.findByBarcode(barcode);
         List<Review> reviews = rentalBook.getReviews();

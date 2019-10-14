@@ -47,7 +47,6 @@ public class BookOrderDeserializer extends StdDeserializer<BookOrder> {
 
         bookOrder.setCancel(false);
         bookOrder.setBooks(rentalBooks);
-        bookOrder.setAccount(username);
         bookOrder.setAddress(jsonNode.get("address").textValue());
         bookOrder.setStatus(OrderStatus.Accepted);
         bookOrder.setShippingFee(0);
