@@ -53,7 +53,7 @@ public class RentalBookController {
                     return true;
                 })
                 .filter(rentingBook -> {
-                    if (barcode != null) {
+                    if (title != null) {
                         return rentingBook.getBook().getTitle().toLowerCase().contains(title.toLowerCase());
                     }
                     return true;

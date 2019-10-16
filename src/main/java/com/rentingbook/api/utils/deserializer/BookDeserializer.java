@@ -10,7 +10,6 @@ import com.rentingbook.api.model.book.bookdetails.Genre;
 import com.rentingbook.api.model.book.bookdetails.Language;
 import com.rentingbook.api.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.jackson.JsonComponent;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -19,7 +18,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
-@JsonComponent
+//@JsonComponent
 public class BookDeserializer extends JsonDeserializer<Book> {
     private AuthorService authorService;
 

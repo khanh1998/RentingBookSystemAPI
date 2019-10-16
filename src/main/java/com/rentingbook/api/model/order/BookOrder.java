@@ -22,7 +22,7 @@ public class BookOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private OrderStatus status = OrderStatus.Received;
+    private OrderStatus status = OrderStatus.Done;
     @ManyToMany
     private List<RentalBook> books;
     private float shippingFee = 0;

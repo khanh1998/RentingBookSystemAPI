@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,7 +29,9 @@ public class ReturnBookOrderController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody ReturnBookOrder returnBookOrder) {
+    public ResponseEntity<ReturnBookOrder> create(@RequestBody ReturnBookOrder returnBookOrder) {
+        returnBookOrder.setActualReceivedDate(LocalDate.now());
+        returnBookOrder.setAppointmentDate(LocalDate.now());
         ReturnBookOrder order = returnBookOrderService.save(returnBookOrder);
         Account account = accountService.getCurrentAccount();
         List<ReturnBookOrder> list = account.getReturnBookOrders();
@@ -40,14 +43,14 @@ public class ReturnBookOrderController {
     }
 
     @PatchMapping
-    public ResponseEntity<?> update(@RequestParam int returnBookOrderId) {
+    public ResponseEntity<ReturnBookOrder> update(@RequestParam int returnBookOrderId) {
         Optional<ReturnBookOrder> returnBookOrder = returnBookOrderService.findOne(returnBookOrderId);
         if (returnBookOrder.isPresent()) {
             returnBookOrder.get().setCancel(true);
             ReturnBookOrder saved = returnBookOrderService.save(returnBookOrder.get());
             return ResponseEntity.ok(saved);
         }
-        return ResponseEntity.badRequest().body("Return book order ID is not true");
+        return ResponseEntity.badRequest().body(null);
     }
 
 }

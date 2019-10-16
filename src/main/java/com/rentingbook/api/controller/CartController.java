@@ -25,10 +25,10 @@ public class CartController {
     }
 
     @PutMapping
-    public ResponseEntity<?> saveCart(@RequestBody Cart cart) {
+    public ResponseEntity<Cart> saveCart(@RequestBody Cart cart) {
         if (cart != null)
             return ResponseEntity.ok(cartService.save(cart));
-        return ResponseEntity.badRequest().body("You have to send data of cart as request body");
+        return ResponseEntity.badRequest().body(null);
     }
 
     @GetMapping

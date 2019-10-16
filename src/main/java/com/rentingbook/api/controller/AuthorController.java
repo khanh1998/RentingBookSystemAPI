@@ -20,12 +20,12 @@ public class AuthorController {
     }
 
     @GetMapping("")
-    public ResponseEntity<?> getAuthors(@RequestParam int id) {
+    public ResponseEntity<Author> getAuthors(@RequestParam int id) {
         Optional<Author> author = authorService.findByID(id);
         if (author.isPresent()) {
-            return ResponseEntity.ok(author);
+            return ResponseEntity.ok(author.get());
         }
-        return ResponseEntity.badRequest().body("Wrong id of author");
+        return ResponseEntity.badRequest().body(null);
     }
 
     @PostMapping("")

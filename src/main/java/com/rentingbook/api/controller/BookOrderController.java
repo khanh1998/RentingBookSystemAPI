@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +31,8 @@ public class BookOrderController {
 
     @PostMapping
     public ResponseEntity<BookOrder> create(@RequestBody BookOrder bookOrder) {
+        bookOrder.setDeliveredDate(LocalDate.now());
+        bookOrder.setShippingFee(0);
         BookOrder order = bookOrderService.save(bookOrder);
         Account currentAccount = accountService.getCurrentAccount();
         List<BookOrder> bookOrders = currentAccount.getOrders();
@@ -39,12 +42,12 @@ public class BookOrderController {
     }
 
     @PatchMapping
-    public ResponseEntity<?> updateOrder(@RequestBody BookOrder bookOrder) {
+    public ResponseEntity<BookOrder> updateOrder(@RequestBody BookOrder bookOrder) {
         if (bookOrder.getStatus() != OrderStatus.Done) {
             bookOrder.setCancel(true);
             return ResponseEntity.ok(bookOrderService.save(bookOrder));
         }
-        return ResponseEntity.badRequest().body("You can not update order when it has been done");
+        return ResponseEntity.badRequest().body(null);
     }
 
     @GetMapping

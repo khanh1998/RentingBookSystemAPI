@@ -97,7 +97,7 @@ public class AccountController {
     }
 
     @PostMapping("/rentedbook")
-    public ResponseEntity<?> addRentedBook(@RequestParam int orderId) {
+    public ResponseEntity<List<RentedBook>> addRentedBook(@RequestParam int orderId) {
         //get current rented books of account
         Account account = accountService.getCurrentAccount();
         List<RentedBook> rentedBookList = account.getCurrentRentalBook();
@@ -123,11 +123,11 @@ public class AccountController {
             return ResponseEntity.ok(accountService.save(account).getCurrentRentalBook());
         }
 
-        return ResponseEntity.badRequest().body("Order id is not correct");
+        return ResponseEntity.badRequest().body(null);
     }
 
     @DeleteMapping("rentedbook")
-    public ResponseEntity<?> deleteRentedBook(@RequestParam int returnOrderId) {
+    public ResponseEntity<Account> deleteRentedBook(@RequestParam int returnOrderId) {
         Optional<ReturnBookOrder> returnBookOrder = returnBookOrderService.findOne(returnOrderId);
         Account account = accountService.getCurrentAccount();
         if (returnBookOrder.isPresent()) {
@@ -141,7 +141,7 @@ public class AccountController {
                     );
             return ResponseEntity.ok().body(accountService.save(account));
         }
-        return ResponseEntity.badRequest().body("Your input return book order id is not true");
+        return ResponseEntity.badRequest().body(null);
     }
     @GetMapping("/savedbook")
     public List<RentalBook> getSavedBooks() {
