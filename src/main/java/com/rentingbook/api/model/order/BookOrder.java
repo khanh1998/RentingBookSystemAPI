@@ -1,5 +1,6 @@
 package com.rentingbook.api.model.order;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.rentingbook.api.model.book.RentalBook;
 import com.rentingbook.api.model.order.orderdetails.OrderStatus;
 import lombok.Getter;
@@ -29,6 +30,7 @@ public class BookOrder {
     private boolean cancel = false;
     private String address;
     @CreationTimestamp
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
     private LocalDateTime dateTime;
     private LocalDate deliveredDate;
 
